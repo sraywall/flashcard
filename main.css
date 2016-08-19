@@ -1,8 +1,12 @@
+li{
+  list-style-type: none;
+}
 .item{
   border:solid 3px black;
   text-align: center;
   justify-content: center;
   border-bottom:solid 1px white;
+  position: relative;
 }
 .addItem{
   border:solid 3px black;
@@ -20,4 +24,17 @@
   /* Rules below not implemented in browsers yet */
   -o-user-select: none;
   user-select: none;
+}
+.edit-icon{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-top: 3px;
+  padding-right: 3px;
+  opacity:0;
+}
+.edit-icon:hover{
+  opacity: 1;
+  -webkit-transition: opacity .25s ease-in-out .0s;
+  transition: opacity .25s ease-in-out .0s;
 }
