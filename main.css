@@ -1,0 +1,23 @@
+.item{
+  border:solid 3px black;
+  text-align: center;
+  justify-content: center;
+  border-bottom:solid 1px white;
+}
+.addItem{
+  border:solid 3px black;
+  text-align: center;
+  justify-content: center;
+}
+.addItem:hover{
+  background-color: #777777;
+}
+.addItem p{
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}

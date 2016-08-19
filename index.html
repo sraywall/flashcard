@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>A Flashcard System</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="card" id="myCard">
+        <u>
+          <li><div class="addItem" onclick="addItem()">
+                <p unselectable="on">Add new Item</p>
+              </div>
+          </li>
+        </u>
+
+    </div>
+  </body>
+  <script>
+    function addItem(){
+      var newItem = document.createElement("LI");       // Create a <li> node
+      newItem.innerHTML =
+      ` <li>
+          <div class=\"item\">
+            <p>Label:</p>
+            <span>::before == $0</span>
+          </div>
+        </li>`;
+      var list = document.getElementById("myCard");
+      list.insertBefore(newItem, list.childNodes[0]);
+    }
+  </script>
+</html>
