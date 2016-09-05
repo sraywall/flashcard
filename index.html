@@ -3,30 +3,44 @@
   <head>
     <title>A Flashcard System</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
   </head>
   <body>
     <div class="card" id="myCard">
-        <u>
-          <li><div class="addItem" onclick="addItem()">
+        <p>My Card</p>
+        <ul id="sortable">
+          <li draggable="false">
+              <div class="addItem" onclick="addItem()">
                 <p unselectable="on">Add new Item</p>
               </div>
           </li>
-        </u>
+        </ul>
 
     </div>
   </body>
   <script>
+  var counter = 0;
+      $( function() {
+      $( "#sortable" ).sortable();
+      $( "#sortable" ).disableSelection();
+    } );
     function addItem(){
+      counter++;
       var newItem = document.createElement("LI");       // Create a <li> node
       newItem.innerHTML =
-      ` <li>
-          <div class=\"item\">
-            <p>Label:</p>
+      `<div class=\"item\">
+            <p>Label:`+counter+`</p>
             <img class="edit-icon" src="ic_border_color_black_24dp.png">
-          </div>
-        </li>`;
-      var list = document.getElementById("myCard");
+          </div>`;
+      var list = document.getElementById("sortable");
+      //list.appendChild(newItem);
       list.insertBefore(newItem, list.childNodes[0]);
+    }
+    function createItem(){
+
     }
   </script>
 </html>
