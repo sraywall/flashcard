@@ -13,7 +13,7 @@
         <p>My Card</p>
         <ul id="sortable">
           <li draggable="false">
-              <div class="addItem" onclick="createItem()">
+              <div class="addItem">
                 <p unselectable="on">Add new Item</p>
                 <div class="addItemDiv" >
                   <form action="#" id="infoform">
@@ -36,13 +36,21 @@
       $( "#sortable" ).sortable();
       $( "#sortable" ).disableSelection();
     } );*/
+    $(document).ready(function(){
       $("form").submit(function (ev){
           addItem(
             $("input[name='usrname']").val(),
             $("textarea[name='comment']").val()
           );
           ev.preventDefault();
-      })
+      });
+
+    });
+
+    $(document).on("click",".item",function (){
+        $(this).find(".info").toggle();
+        //alert("please!");
+      });
 
     function addItem(name,info){
       counter++;
@@ -51,15 +59,11 @@
       `<div class=\"item\">
             <p>Label:`+name+`</p>
             <img class="edit-icon" src="ic_border_color_black_24dp.png">
-            <p>`+info+`</p>
+            <p class="info">`+info+`</p>
           </div>`;
       var list = document.getElementById("sortable");
       //list.appendChild(newItem);
       list.insertBefore(newItem, list.childNodes[0]);
-    }
-    function createItem(){
-      //$(".addItem").hide();
-      //$(".addItemDiv").show();
     }
   </script>
 </html>
