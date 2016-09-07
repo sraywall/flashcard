@@ -13,9 +13,18 @@
         <p>My Card</p>
         <ul id="sortable">
           <li draggable="false">
-              <div class="addItem" onclick="addItem()">
+              <div class="addItem" onclick="createItem()">
                 <p unselectable="on">Add new Item</p>
+                <div class="addItemDiv" >
+                  <form action="#" id="infoform">
+                    Name: <input type="text" name="usrname">
+                    <input type="submit" id="submit" value="add">
+                  </form>
+                  <br>
+                    <textarea rows="4" cols="50" name="comment" form="infoform"></textarea>
+                </div>
               </div>
+
           </li>
         </ul>
 
@@ -23,24 +32,34 @@
   </body>
   <script>
   var counter = 0;
-      $( function() {
+    /*  $( function() {
       $( "#sortable" ).sortable();
       $( "#sortable" ).disableSelection();
-    } );
-    function addItem(){
+    } );*/
+      $("form").submit(function (ev){
+          addItem(
+            $("input[name='usrname']").val(),
+            $("textarea[name='comment']").val()
+          );
+          ev.preventDefault();
+      })
+
+    function addItem(name,info){
       counter++;
       var newItem = document.createElement("LI");       // Create a <li> node
       newItem.innerHTML =
       `<div class=\"item\">
-            <p>Label:`+counter+`</p>
+            <p>Label:`+name+`</p>
             <img class="edit-icon" src="ic_border_color_black_24dp.png">
+            <p>`+info+`</p>
           </div>`;
       var list = document.getElementById("sortable");
       //list.appendChild(newItem);
       list.insertBefore(newItem, list.childNodes[0]);
     }
     function createItem(){
-
+      //$(".addItem").hide();
+      //$(".addItemDiv").show();
     }
   </script>
 </html>
