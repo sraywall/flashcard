@@ -9,34 +9,56 @@
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
   </head>
   <body>
-    <button type="button" onclick="toggleAll()">Toggle All</button>
-    <div class="card" id="myCard">
+    <div class="card">
+      <button class="toggleButton" type="button">Toggle All</button>
         <p>My Card</p>
-        <ul id="sortable">
+        <ul class="itemList" id="sortable">
           <li draggable="false">
               <div class="addItem">
                 <p unselectable="on">Add new Item</p>
                 <div class="addItemDiv">
-                  <form action="#" id="infoform">
+                  <form action="#" class="addItemForm">
                     Name: <input type="text" name="usrname">
-                    <input type="submit" id="submit" value="add">
+                    <input type="submit" value="add">
+                    <br>
+                      <textarea rows="4" cols="50" name="comment"></textarea>
                   </form>
-                  <br>
-                    <textarea rows="4" cols="50" name="comment" form="infoform"></textarea>
+
                 </div>
               </div>
+          </li>
+        </ul>
 
+    </div>
+    <div class="card">
+      <button class="toggleButton" type="button">Toggle All</button>
+        <p>My Card</p>
+        <ul class="itemList">
+          <li draggable="false" class="addItem">
+              <div >
+                <p unselectable="on">Add new Item</p>
+                <div class="addItemDiv">
+                  <form action="#" class="addItemForm">
+                    Name: <input type="text" name="usrname">
+                    <input type="submit" value="add">
+                    <br>
+                      <textarea rows="4" cols="50" name="comment"></textarea>
+                  </form>
+                </div>
+              </div>
           </li>
         </ul>
 
     </div>
   </body>
   <script>
-  function toggleAll(){
-    $(".info").toggle();
-  }
 
-  var counter = 0;
+  $(document).on("click",".toggleButton",function (){
+      $(this).parent().find(".info").toggle();
+    });
+  function toggleAll(){
+    $(this).find(".itemList").toggle();//.children(".info").toggle();
+  }
     /*  $( function() {
       $( "#sortable" ).sortable();
       $( "#sortable" ).disableSelection();
@@ -49,36 +71,27 @@
      e.stopPropagation();
     });
     $(document).ready(function(){
-      $("form").submit(function (ev){
-          addItem(
-            $("input[name='usrname']").val(),
-            $("textarea[name='comment']").val()
-          );
-          ev.preventDefault();
-          $(".addItemDiv").hide();
-          $("input[name='usrname']").val("");
-          $("textarea[name='comment']").val("");
+      $(".addItemForm").submit(function (ev){
+        var form = this;
+        var usrname = $("input[name='usrname']",form).val();
+        var comment = $("textarea[name='comment']",form).val();
+        if(usrname !=="" && comment !== ""){
+          $(form).closest(".addItem").before(
+            `<div class=\"item\">
+                  <p>`+usrname+`</p>
+                  <img class="edit-icon" src="ic_border_color_black_24dp.png">
+                  <p class="info">`+comment+`</p>
+                </div>`);
+        }
+        ev.preventDefault();
+          $(form).closest(".addItemDiv").hide();
+          $("input[name='usrname']",form).val("");
+          $("textarea[name='comment']",form).val("");
       });
-
     });
 
     $(document).on("click",".item",function (){
         $(this).find(".info").toggle();
-        //alert("please!");
       });
-
-    function addItem(name,info){
-      counter++;
-      var newItem = document.createElement("LI");       // Create a <li> node
-      newItem.innerHTML =
-      `<div class=\"item\">
-            <p>`+name+`</p>
-            <img class="edit-icon" src="ic_border_color_black_24dp.png">
-            <p class="info">`+info+`</p>
-          </div>`;
-      var list = document.getElementById("sortable");
-      //list.appendChild(newItem);
-      list.insertBefore(newItem, list.childNodes[0]);
-    }
   </script>
 </html>

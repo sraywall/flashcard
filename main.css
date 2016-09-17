@@ -13,9 +13,7 @@ li{
   text-align: center;
   justify-content: center;
 }
-.addItem:hover{
-  background-color: #777777;
-}
+
 .addItem p{
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
