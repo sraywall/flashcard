@@ -4,9 +4,9 @@
     <title>A Flashcard System</title>
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   </head>
   <body>
     <div class="card">
@@ -72,6 +72,7 @@
     });
     $(document).ready(function(){
       $(".addItemForm").submit(function (ev){
+        ev.preventDefault();
         var form = this;
         var usrname = $("input[name='usrname']",form).val();
         var comment = $("textarea[name='comment']",form).val();
@@ -83,7 +84,22 @@
                   <p class="info">`+comment+`</p>
                 </div>`);
         }
-        ev.preventDefault();
+        var dataString = 'name=' + usrname + '&info=' + comment + '&card_id=1';
+        //var dataString = $(form).serialize();
+          $.ajax({
+            url: "../postItem.php",
+            type: "POST",
+            data: {'name': usrname, 'info': comment, 'card_id': 1}
+          });
+          /*$.post("postItem.php",
+            {
+                name: usrname,
+                info: comment,
+                card_id: 1
+            },
+            function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });*/
           $(form).closest(".addItemDiv").hide();
           $("input[name='usrname']",form).val("");
           $("textarea[name='comment']",form).val("");
